@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<!-- saved from url=(0065)file:///C:/Users/resof/Downloads/calculatrice_ttc_vs_ht_html.html -->
+<html lang="fr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>Calculatrice TTC / HT Dynamique</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Courier New', monospace;
+      background: #1e1e1e;
+      color: #cfcfcf;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: #2d2d2d;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #00ffcc;
+      width: 360px;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 25px;
+      font-size: 22px;
+      color: #00ffcc;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      color: #00ffcc;
+      text-align: center;
+      font-size: 16px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: 1px solid #00ffcc;
+      background: #1e1e1e;
+      color: #cfcfcf;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .tva {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #c0ffc0;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Calculatrice TTC / HT</h1>
+
+  <label>HT (€)</label>
+  <input type="number" id="ht" placeholder="Ex: 100" oninput="updateTTC()">
+
+  <label>TTC (€)</label>
+  <input type="number" id="ttc" placeholder="Ex: 120" oninput="updateHT()">
+
+  <label>TVA (%)</label>
+  <input type="number" id="tva" value="20" oninput="updateBoth()">
+
+  <div class="tva">Les valeurs se mettent à jour automatiquement selon la saisie.</div>
+</div>
+
+<script>
+  function updateTTC() {
+    const ht = parseFloat(document.getElementById('ht').value);
+    const tva = parseFloat(document.getElementById('tva').value) / 100;
+    if (!isNaN(ht)) {
+      document.getElementById('ttc').value = (ht * (1 + tva)).toFixed(2);
+    }
+  }
+
+  function updateHT() {
+    const ttc = parseFloat(document.getElementById('ttc').value);
+    const tva = parseFloat(document.getElementById('tva').value) / 100;
+    if (!isNaN(ttc)) {
+      document.getElementById('ht').value = (ttc / (1 + tva)).toFixed(2);
+    }
+  }
+
+  function updateBoth() {
+    updateTTC();
+    updateHT();
+  }
+</script>
+
+
+
+</body></html>
